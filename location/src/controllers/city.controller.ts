@@ -1,30 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {City} from '../models';
 import {CityRepository} from '../repositories';
 
+@authenticate('jwt')
 export class CityController {
   constructor(
     @repository(CityRepository)
-    public cityRepository : CityRepository,
-  ) {}
+    public cityRepository: CityRepository,
+  ) { }
 
   @post('/cities')
   @response(200, {
